@@ -3,11 +3,13 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import utils.Retry;
 
 public class CartTest extends BaseTest{
 
     SoftAssert softAssert = new SoftAssert();
-    @Test()
+
+    @Test(testName = "Проверка добавления товара в корзину", description = "Проверка добавления товара в корзину", retryAnalyzer = Retry.class)
     public void checkAddProductToCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");

@@ -1,15 +1,15 @@
 package tests;
 
-
-import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import utils.Retry;
 
 public class LoginTest extends BaseTest {
 
     SoftAssert softAssert = new SoftAssert();
 
-    @Test
+    @Test(testName = "Проверка авторизации", description = "Проверка авторизации", retryAnalyzer = Retry.class)
     public void checkCorrectLogin() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -19,7 +19,7 @@ public class LoginTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(testName = "Проверка заблокированного пользователя", description = "Проверка заблокированного пользователя", retryAnalyzer = Retry.class)
     public void checkUserLocked() {
         loginPage.open();
         loginPage.login("locked_out_user", "secret_sauce");
@@ -29,7 +29,7 @@ public class LoginTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(testName = "Проверка без пароля", description ="Проверка без пароля", retryAnalyzer = Retry.class)
     public void checkWithoutPassword() {
         loginPage.open();
         loginPage.login("standart_user", "");
@@ -39,7 +39,7 @@ public class LoginTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(testName = "Проверка без логина", description = "Проверка без логина", retryAnalyzer = Retry.class)
     public void checkWithoutLogin() {
         loginPage.open();
         loginPage.login("", "secret_sauce");
@@ -49,7 +49,16 @@ public class LoginTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @DataProvider(name = "Тестовые данные для негативного логина")
+    public Object[][] loginData(){
+        return new Object[][]{
+                {"standard_user","","Epic sadface: Password is required"},
+                {"","secret_sauce","Epic sadface: Username is required"},
+                {"test","test","Epic sadface: Username and password do not match any user in this service"}
+        };
+    }
+
+    @Test(testName = "Проверка ввода разных логинов и паролей", description = "Проверка ввода разных логинов и паролей", dataProvider = "Тестовые данные для негативного логина", retryAnalyzer = Retry.class)
     public void checkInputLoginPassword(String user, String password, String message) {
         loginPage.open();
         loginPage.login(user, password);
