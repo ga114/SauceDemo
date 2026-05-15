@@ -1,5 +1,7 @@
 package tests;
 
+
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -10,6 +12,14 @@ public class CartTest extends BaseTest{
     SoftAssert softAssert = new SoftAssert();
 
     @Test(testName = "Проверка добавления товара в корзину", description = "Проверка добавления товара в корзину", retryAnalyzer = Retry.class)
+    @Description  ("Проверка добавления товара в корзину")
+    @Severity(SeverityLevel.MINOR)
+    @Epic("Saucedemo-1.0")
+    @Feature("auth in saucedemo")
+    @Story("Авторизация")
+    @TmsLink("http://www.jira.simple/CM-112")
+    @Issue("http://www.jira.simple/CM-1112")
+    @Flaky
     public void checkAddProductToCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");

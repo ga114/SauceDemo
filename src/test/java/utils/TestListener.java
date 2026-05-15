@@ -22,13 +22,27 @@ public class TestListener implements ITestListener {
     public void onTestFailure(ITestResult iTestResult) {
         System.out.println(String.format("======================================== ТЕСТ ПРОВАЛЕН %s Duration: %ss ========================================", iTestResult.getName(),
                 getExecutionTime(iTestResult)));
+        takeScreenshot(iTestResult);
     }
 
     public void onTestSkipped(ITestResult iTestResult) {
         System.out.println(String.format("======================================== ТЕСТ ПРОПУЩЕН %s ========================================", iTestResult.getName()));
+        takeScreenshot(iTestResult);
     }
 
-
+    private byte[] takeScreenshot(ITestResult iTestResult) {
+        ITestContext context = iTestResult.getTestContext();
+        try {
+            WebDriver driver = (WebDriver) context.getAttribute("driver");
+            if(driver != null) {
+                return AllureUtils.takeScreenshot(driver);
+            } else {
+                return new byte[] {};
+            }
+        } catch (NoSuchSessionException | IllegalStateException ex) {
+            return new byte[] {};
+        }
+    }
 
     private long getExecutionTime(ITestResult iTestResult) {
         return TimeUnit.MILLISECONDS.toSeconds(iTestResult.getEndMillis() - iTestResult.getStartMillis());
