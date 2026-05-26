@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
     WebDriver driver;
-
     By userField = By.cssSelector("[data-test=username]");
     By passwordField = By.cssSelector("[data-test=password]");
     By loginButton = By.cssSelector("[data-test=login-button]");

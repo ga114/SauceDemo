@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 
 public class ProductsPage {
     WebDriver driver;
-
     By title = By.cssSelector("[data-test=title]");
     By readMore = By.xpath("/html/body/div/main/section[2]/div/div/div[1]/div/div[2]/div/a");
     //id кнопки добавить конкретного товара со страницы
