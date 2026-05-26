@@ -1,6 +1,7 @@
 package pages;
 
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -19,14 +20,17 @@ public class ProductsPage {
         this.driver = driver;
     }
 
+    @Step("Получение заголовка")
     public String getTitle() {
         return driver.findElement(title).getText();
     }
 
+    @Step("Клик по кнопке добавить в корзину")
     public void clickButton() {
         driver.findElement(productAdd).click();
     }
 
+    @Step("Клик по кнопке удалить продукт")
     public String checkButtonRemove() {
         return driver.findElement(getProductRemove).getText();
     }
