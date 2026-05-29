@@ -6,12 +6,14 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.Retry;
 
+import static utils.AllureUtils.takeScreenshot;
+
 public class LoginTest extends BaseTest {
 
     SoftAssert softAssert = new SoftAssert();
 
     @Test(testName = "Проверка авторизации", description = "Проверка авторизации", retryAnalyzer = Retry.class)
-    @Description  ("Проверка авторизации с корректными данными")
+    @Description("Проверка авторизации с корректными данными")
     @Severity(SeverityLevel.CRITICAL)
     @Epic("Saucedemo-1.0")
     @Feature("auth in saucedemo")
@@ -26,10 +28,11 @@ public class LoginTest extends BaseTest {
                 "Products",
                 "Логин не выполнен");
         softAssert.assertAll();
+        takeScreenshot(driver);
     }
 
     @Test(testName = "Проверка заблокированного пользователя", description = "Проверка заблокированного пользователя", retryAnalyzer = Retry.class)
-    @Description  ("Проверка заблокированного пользователя")
+    @Description("Проверка заблокированного пользователя")
     @Severity(SeverityLevel.CRITICAL)
     @Epic("Saucedemo-1.0")
     @Feature("auth in saucedemo")
@@ -44,10 +47,11 @@ public class LoginTest extends BaseTest {
                 "Epic sadface: Sorry, this user has been locked out.",
                 "Сообщение об ошибке не появилось");
         softAssert.assertAll();
+        takeScreenshot(driver);
     }
 
-    @Test(testName = "Проверка без пароля", description ="Проверка без пароля", retryAnalyzer = Retry.class)
-    @Description  ("Проверка без пароля")
+    @Test(testName = "Проверка без пароля", description = "Проверка без пароля", retryAnalyzer = Retry.class)
+    @Description("Проверка без пароля")
     @Severity(SeverityLevel.MINOR)
     @Epic("Saucedemo-1.0")
     @Feature("auth in saucedemo")
@@ -62,10 +66,11 @@ public class LoginTest extends BaseTest {
                 "Epic sadface: Password is required",
                 "Сообщение об ошибке не появилось");
         softAssert.assertAll();
+        takeScreenshot(driver);
     }
 
     @Test(testName = "Проверка без логина", description = "Проверка без логина", retryAnalyzer = Retry.class)
-    @Description  ("Проверка без логина")
+    @Description("Проверка без логина")
     @Severity(SeverityLevel.MINOR)
     @Epic("Saucedemo-1.0")
     @Feature("auth in saucedemo")
@@ -80,19 +85,20 @@ public class LoginTest extends BaseTest {
                 "Epic sadface: Username is required",
                 "Сообщение об ошибке не появилось");
         softAssert.assertAll();
+        takeScreenshot(driver);
     }
 
     @DataProvider(name = "Тестовые данные для негативного логина")
-    public Object[][] loginData(){
+    public Object[][] loginData() {
         return new Object[][]{
-                {"standard_user","","Epic sadface: Password is required"},
-                {"","secret_sauce","Epic sadface: Username is required"},
-                {"test","test","Epic sadface: Username and password do not match any user in this service"}
+                {"standard_user", "", "Epic sadface: Password is required"},
+                {"", "secret_sauce", "Epic sadface: Username is required"},
+                {"test", "test", "Epic sadface: Username and password do not match any user in this service"}
         };
     }
 
     @Test(testName = "Проверка ввода разных логинов и паролей", description = "Проверка ввода разных логинов и паролей", dataProvider = "Тестовые данные для негативного логина", retryAnalyzer = Retry.class)
-    @Description  ("Проверка ввода разных логинов и паролей")
+    @Description("Проверка ввода разных логинов и паролей")
     @Severity(SeverityLevel.MINOR)
     @Epic("Saucedemo-1.0")
     @Feature("auth in saucedemo")
@@ -107,5 +113,6 @@ public class LoginTest extends BaseTest {
                 message,
                 "Логин не выполнен");
         softAssert.assertAll();
+        takeScreenshot(driver);
     }
 }

@@ -24,8 +24,8 @@ public class BaseTest {
         //добавлена кроссбраузерность
         if(browser.equalsIgnoreCase("chrome")){
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("start-maximized");
-            options.addArguments("incognito");
+            options.addArguments("--start-maximized");
+            options.addArguments("--incognito");
             driver = new ChromeDriver(options);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
         } else if(browser.equalsIgnoreCase("firefox")){

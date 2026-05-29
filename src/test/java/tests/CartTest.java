@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.Retry;
 
+import static utils.AllureUtils.takeScreenshot;
+
 public class CartTest extends BaseTest{
 
     SoftAssert softAssert = new SoftAssert();
