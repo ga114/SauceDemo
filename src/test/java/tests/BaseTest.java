@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.*;
 import pages.CartPage;
 import pages.InventoryPage;
@@ -25,11 +26,15 @@ public class BaseTest {
         if(browser.equalsIgnoreCase("chrome")){
             ChromeOptions options = new ChromeOptions();
             options.addArguments("start-maximized");
+            options.addArguments("--headless");
             options.addArguments("incognito");
             driver = new ChromeDriver(options);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
         } else if(browser.equalsIgnoreCase("firefox")){
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--headless");
             driver = new FirefoxDriver();
+            driver.manage().window().maximize();
         }
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
