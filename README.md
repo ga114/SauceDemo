@@ -13,3 +13,17 @@
 3. Открыть страницу по кнопке корзины с data-test=shopping-cart-link. Заголовок страницы Your Cart?
 4. На странице имеется кнопка Remove с data-test=remove-sauce-labs-backpack?
 5. Нажать на ссылку с data-test=inventory-item-name. Открылась страница с товаром, у которого название Sauce Labs Backpack?
+
+# Домашнее задание №13 xUnit
+
+1. Выполнить разметку тестов проекта SauceDemo
+2. Реализовать кросс-браузерное тестирование в проекте SauceDemo (минимум 2 браузера)
+3. Реализовать подключение Retry через TestNG.xml файл
+   https://swtestacademy.com/retry-failed-tests-testng-iretryanalyzer/
+
+# Домашнее задание №14 Allure
+
+1. Добавить интеграцию с Allure Report в проект SauceDemo
+2. Выполнить с помощью аннотаций разметку всех тестов и страниц
+3. Добавить функцию добавления скриншотов тестов при падении
+4. Отправить ментору скриншот отчета allure
